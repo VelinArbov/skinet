@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data.SeedData
@@ -22,7 +23,7 @@ namespace Infrastructure.Data.SeedData
 
                     var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
 
-                    foreach(var item in brands)
+                    foreach (var item in brands)
                     {
                         context.ProductBrands.Add(item);
                     }
@@ -31,14 +32,14 @@ namespace Infrastructure.Data.SeedData
 
                 }
 
-                   if (!context.ProductTypes.Any())
+                if (!context.ProductTypes.Any())
                 {
                     var typesData =
                         File.ReadAllText("../Infrastructure/Data/SeedData/types.json");
 
                     var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
 
-                    foreach(var item in types)
+                    foreach (var item in types)
                     {
                         context.ProductTypes.Add(item);
                     }
@@ -54,7 +55,7 @@ namespace Infrastructure.Data.SeedData
 
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
-                    foreach(var item in products)
+                    foreach (var item in products)
                     {
                         context.Products.Add(item);
                     }
@@ -62,8 +63,24 @@ namespace Infrastructure.Data.SeedData
                     await context.SaveChangesAsync();
 
                 }
+
+                  if (!context.DeliveryMethods.Any())
+                {
+                    var dmData =
+                        File.ReadAllText("../Infrastructure/Data/SeedData/delivery.json");
+
+                    var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
+
+                    foreach(var item in deliveryMethods)
+                    {
+                        context.DeliveryMethods.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var logger = loggerFactory.CreateLogger<StoreContextSeed>();
                 logger.LogError(ex.Message);
