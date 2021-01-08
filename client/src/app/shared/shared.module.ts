@@ -9,12 +9,14 @@ import { OrderTotalsComponent } from './components/order-totals/order-totals.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import {CdkStepperModule} from '@angular/cdk/stepper';
-import { StepperComponent } from './components/stepper/stepper.component'
+import { StepperComponent } from './components/stepper/stepper.component';
+import { BasketSummeryComponent } from './basket-summery/basket-summery.component'
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent, StepperComponent],
+  declarations: [PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent, StepperComponent, BasketSummeryComponent],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
@@ -22,6 +24,7 @@ import { StepperComponent } from './components/stepper/stepper.component'
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     CdkStepperModule,
+    RouterModule,
   ],
   exports:[
     PaginationModule,
@@ -33,7 +36,8 @@ import { StepperComponent } from './components/stepper/stepper.component'
     BsDropdownModule,
     TextInputComponent,
     CdkStepperModule,
-    StepperComponent
+    StepperComponent,
+    BasketSummeryComponent
 
   ]
 })
