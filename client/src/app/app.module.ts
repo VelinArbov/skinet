@@ -12,6 +12,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptors';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { OrdersComponent } from './orders/orders.component';
 
 
 
@@ -19,6 +20,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
+    OrdersComponent,
   
   ],
   imports: [
