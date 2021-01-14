@@ -20,10 +20,21 @@ export class BasketService {
 
   constructor(private http: HttpClient) { }
 
+  createPaymentIntent(){
+    return this.http.post(this.baseUrl + 'payments/' + this.gerCurrentBasketValue().id,{})
+    .pipe(
+      map((basket:IBasket) => {
+        this.basketSource.next(basket);
+        this.shipping = basket.shippingPrice;
+      })
+    )
+  }
+
   setShippingPrice(deliveryMethod: IDeliveryMethod){
     this.shipping = deliveryMethod.price;
     const basket = this.gerCurrentBasketValue();
     basket.deliveryMethodId = deliveryMethod.id;
+    basket.shippingPrice = deliveryMethod.price;
     this.CalculateTotal();
     this.setBasket(basket);
   }

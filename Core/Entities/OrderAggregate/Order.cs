@@ -14,7 +14,7 @@ namespace Core.Entities.OrderAggregate
         public Order(IReadOnlyList<OrderItem> orderItems,
                 string buyerEmail,
                Address shipToAddress,
-               DeliveryMethod deliveryMethod, decimal subtotal)
+               DeliveryMethod deliveryMethod, decimal subtotal, string paymentIntentId)
 
         {
             this.BuyerEmail = buyerEmail;
@@ -22,6 +22,7 @@ namespace Core.Entities.OrderAggregate
             this.DeliveryMethod = deliveryMethod;
             this.Subtotal = subtotal;
             this.OrderItems = orderItems;
+            this.PaymentIntentId =paymentIntentId;
 
 
         }
