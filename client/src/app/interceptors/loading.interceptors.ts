@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/c
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
-import {  delay } from "rxjs/operators";
+import { delay } from "rxjs/operators";
 
 import { BusyService } from "../core/services/busy.service";
 
@@ -12,10 +12,14 @@ export class LoadingInterceptor implements HttpInterceptor {
 
     }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if(req.method === 'POST' && req.url.includes('orders')){
+        if (req.method === 'POST' && req.url.includes('orders')) {
             return next.handle(req);
         }
-        if(req.url.includes('emailexist')){
+        if (req.method === 'DELETE') {
+            return next.handle(req);
+
+        }
+        if (req.url.includes('emailexist')) {
             return next.handle(req);
 
         }
@@ -26,9 +30,9 @@ export class LoadingInterceptor implements HttpInterceptor {
                 this.busyService.idle();
             })
         )
-         
 
-       
+
+
     }
 
 }
